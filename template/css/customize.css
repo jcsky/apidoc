@@ -1,0 +1,15 @@
+#content {
+  margin-left: 20%;
+}
+.sidenav {
+  width: 20%;
+}
+.sidenav-search {
+  width: 20%;
+}
+.sidenav > li > a {
+  width: 100%;
+}
+.sidenav > li.nav-header > a{
+ width: 100%; 
+}
