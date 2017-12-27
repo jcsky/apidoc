@@ -8,6 +8,7 @@
   <link href="vendor/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="vendor/prettify.css" rel="stylesheet" media="screen">
   <link href="css/style.css" rel="stylesheet" media="screen, print">
+  <link href="css/customize.css" rel="stylesheet" media="screen, print">
   <link href="img/favicon.ico" rel="icon" type="image/x-icon">
   <script src="vendor/polyfill.js"></script>
 </head>
@@ -30,6 +31,7 @@
         {{/if}}
       {{else}}
         <li class="{{#if hidden}}hide {{/if}}" data-group="{{group}}" data-name="{{name}}" data-version="{{version}}">
+          <!-- <a href="#api-{{group}}-{{name}}" class="nav-list-item">{{title}}</a> -->
           <a href="#api-{{group}}-{{name}}" class="nav-list-item">{{title}}</a>
         </li>
       {{/if}}
@@ -84,6 +86,23 @@
       </div>
     {{/if}}
   {{/if}}
+</script>
+
+<script id="template-groups" type="text/x-handlebars-template">
+  <!-- <ul> -->
+  {{#each nav}}
+    {{#if title}}
+      {{#if isHeader}}
+        {{#if same_as_above}}
+          <a href="#api-{{group}}">{{group_last}}</a>,&ensp;
+        {{else}}
+          <h3>{{group_first}}</h3>
+          <a href="#api-{{group}}">{{group_last}}</a>,&ensp;
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  {{/each}}
+  <!-- </ul> -->
 </script>
 
 <script id="template-sections" type="text/x-handlebars-template">
@@ -642,6 +661,7 @@
     <div id="content">
       <div id="project"></div>
       <div id="header"></div>
+      <div id="groups"></div>
       <div id="sections"></div>
       <div id="footer"></div>
       <div id="generator"></div>
