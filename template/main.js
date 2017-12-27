@@ -65,10 +65,10 @@ require([
     var templateArticle        = Handlebars.compile( $('#template-article').html() );
     var templateCompareArticle = Handlebars.compile( $('#template-compare-article').html() );
     var templateGenerator      = Handlebars.compile( $('#template-generator').html() );
+    var templateGroups         = Handlebars.compile( $('#template-groups').html() );
     var templateProject        = Handlebars.compile( $('#template-project').html() );
     var templateSections       = Handlebars.compile( $('#template-sections').html() );
     var templateSidenav        = Handlebars.compile( $('#template-sidenav').html() );
-
     //
     // apiProject defaults
     //
@@ -168,10 +168,25 @@ require([
     // create Navigationlist
     //
     var nav = [];
+    var above = '';
     apiGroups.forEach(function(group) {
+        let same_as_above;
         // Mainmenu entry
+        let group_first;
+        group_first = group.split('_')[0]
+        if(above == group_first){
+            same_as_above = true;
+        }
+        else{
+            same_as_above = false;
+            above = group_first;
+        }
+
         nav.push({
             group: group,
+            same_as_above: same_as_above,
+            group_first: group_first,
+            group_last: (group.indexOf('_') == -1 ? group : group.substr(1 + group.indexOf('_'))),
             isHeader: true,
             title: apiGroupTitles[group]
         });
@@ -291,6 +306,7 @@ require([
 
     // render Generator
     $('#generator').append( templateGenerator(apiProject) );
+    $('#groups').append( templateGroups(fields) );
 
     // render Project
     _.extend(apiProject, { versions: apiVersions});
@@ -302,6 +318,8 @@ require([
 
     if (apiProject.footer)
         $('#footer').append( templateFooter(apiProject.footer) );
+
+    
 
     //
     // Render Sections and Articles
