@@ -1,11 +1,14 @@
+body{
+  max-width: none;
+}
 #content {
-  margin-left: 20%;
+  margin: 0;
 }
 .sidenav {
-  width: 20%;
+  width: auto;
 }
 .sidenav-search {
-  width: 20%;
+  width: auto;
 }
 .sidenav > li > a {
   width: 100%;
